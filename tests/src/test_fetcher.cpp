@@ -1,7 +1,6 @@
 #include <catch.hpp>
 #include <fmt/core.h>
 #include "constants.h"
-// #define private public // To test private methods
 #include "core/lrss_fetcher.h"
 using namespace lrss;
 
