@@ -2,5 +2,5 @@
 #if __has_include(<catch.hpp>)
     #include <catch.hpp>
 #else
-    #include <catch2/catch.hpp>
+    #include <catch2/catch_all.hpp>
 #endif
