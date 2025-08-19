@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.13) # Fun fact: 3.13 is the latest version working on Windows XP (that I know of, at least)
+
+project(LightRSS)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+# TODO: Check if we need to use the /bigobj compile option for Windows (probably not)
+
+##########################
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+find_package(fmt REQUIRED) # Note that Windows XP needs to use fmt version 4
+
+
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+add_executable(${PROJECT_NAME}
+    src/main.cpp
+)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
