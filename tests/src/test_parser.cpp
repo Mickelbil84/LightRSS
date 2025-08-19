@@ -17,12 +17,20 @@ TEST_CASE("Decide content type", "[parser]") {
 
     for (size_t i = 0; i < sizeof(urls) / sizeof(char*); ++i) {
         std::string response = LRSSFetcher::fetchContent(urls[i]);
+        if (LRSSFetcher::isBadContent(response)) {
+            fmt::print("{}\n", response);
+            response = "";
+        }
         REQUIRE(LRSSParser::decideContentType(response) == types[i]);
     }
 }
 
 TEST_CASE("Parsing YNET feed (RSS)", "[parser]") {
     std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_YNET);
+    if (LRSSFetcher::isBadContent(content)) {
+        fmt::print("{}\n", content);
+        content = "";
+    }
     LRSSFeed ynetFeed = LRSSParser::parseFeed(content);
 
     REQUIRE_FALSE(ynetFeed.invalid);
@@ -36,6 +44,10 @@ TEST_CASE("Parsing YNET feed (RSS)", "[parser]") {
 
 TEST_CASE("Parsing Verge feed (Atom)", "[parser]") {
     std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_VERGE);
+    if (LRSSFetcher::isBadContent(content)) {
+        fmt::print("{}\n", content);
+        content = "";
+    }
     LRSSFeed vergeFeed = LRSSParser::parseFeed(content);
 
     REQUIRE_FALSE(vergeFeed.invalid);

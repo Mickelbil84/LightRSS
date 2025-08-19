@@ -7,6 +7,10 @@ namespace lrss {
     class LRSSFetcher {
     public:
         static std::string fetchContent(std::string url);
+        static bool isBadContent(std::string content);
+
+    private:
+        static constexpr char* LRSS_ERR_CONTENT_PREFIX = ":::";
     };
 }
 
