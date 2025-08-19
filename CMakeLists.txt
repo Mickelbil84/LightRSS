@@ -21,6 +21,8 @@ find_package(Catch2 REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 set(LIGHTRSS_SOURCES_CORE
     ${CMAKE_SOURCE_DIR}/src/core/lrss_parser.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_rss.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_atom.cpp
     ${CMAKE_SOURCE_DIR}/src/core/lrss_fetcher.cpp
 )
 set(LIGHTRSS_LIBRARIES fmt::fmt CURL::libcurl)
