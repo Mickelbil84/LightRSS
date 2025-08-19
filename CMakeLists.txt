@@ -13,12 +13,21 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 find_package(fmt REQUIRED) # Note that Windows XP needs to use fmt version 4
+find_package(CURL REQUIRED)
+find_package(LibXml2 REQUIRED)
 
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
-
-add_executable(${PROJECT_NAME}
-    src/main.cpp
+set(LIGHTRSS_SOURCES_CORE
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_parser.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_rss.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_atom.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_fetcher.cpp
 )
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+set(LIGHTRSS_LIBRARIES fmt::fmt CURL::libcurl LibXml2::LibXml2)
+
+add_executable(${PROJECT_NAME} src/main.cpp ${LIGHTRSS_SOURCES_CORE})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIGHTRSS_LIBRARIES})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
+
+add_subdirectory(tests)
