@@ -1,4 +1,9 @@
-#include <catch.hpp>
+#if __has_include(<catch.hpp>)
+    #include <catch.hpp>
+#else
+    #include <catch2/catch.hpp>
+#endif
+
 #include <fmt/core.h>
 #include "constants.h"
 #include "core/lrss_fetcher.h"
