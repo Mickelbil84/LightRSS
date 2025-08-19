@@ -20,6 +20,8 @@ std::string LRSSFetcher::fetchContent(std::string url) {
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0");
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
         res = curl_easy_perform(curl);
         if (res != CURLE_OK) {
             int responseCode = 0;
