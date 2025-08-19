@@ -1,6 +1,8 @@
 project(tests)
 
 find_package(Catch2 REQUIRED)
+include(CTest)
+include(Catch)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(${PROJECT_NAME}
@@ -14,3 +16,4 @@ add_executable(${PROJECT_NAME}
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIGHTRSS_LIBRARIES} Catch2::Catch2 Catch2::Catch2WithMain)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
+catch_discover_tests(${PROJECT_NAME})

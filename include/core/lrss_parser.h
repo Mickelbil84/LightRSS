@@ -40,7 +40,7 @@ namespace lrss {
 // Then take the `curr` node content from the xml into the correct location/offset in the struct.
 #define XML_PROPERTY_TO_STRUCT(ptr, structName, xmlName) {\
     if (NODE_NAME(curr) == #xmlName) {\
-        ptr.##structName = NODE_CONTENT(curr);\
+        ptr.structName = NODE_CONTENT(curr);\
     }\
 }
 

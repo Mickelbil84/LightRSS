@@ -30,10 +30,7 @@ add_executable(${PROJECT_NAME} src/main.cpp ${LIGHTRSS_SOURCES_CORE})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIGHTRSS_LIBRARIES})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
-if (NOT DEFINED LRSS_WITH_TESTS)
-    set (LRSS_WITH_TESTS true)
-endif()
 
-if (LRSS_WITH_TESTS)
+if (BUILD_TESTING)
     add_subdirectory(tests)
 endif()

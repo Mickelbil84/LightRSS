@@ -88,7 +88,7 @@ jobs:
                     -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
                     -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
                     -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake"
-                    -DLRSS_WITH_TESTS=false
+                    -DBUILD_TESTING=false
                     -S ${{ github.workspace }}
 
             -   name: Build
