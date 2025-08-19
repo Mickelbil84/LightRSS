@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 find_package(fmt REQUIRED) # Note that Windows XP needs to use fmt version 4
 find_package(CURL REQUIRED)
+find_package(LibXml2 REQUIRED)
 find_package(Catch2 REQUIRED)
 
 
