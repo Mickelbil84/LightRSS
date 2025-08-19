@@ -8,8 +8,8 @@ namespace lrss {
     public:
         static LRSSFeed fetchAndParseFeed(std::string url);
 
-    public: // These are public for the sake of tests. Shouldn't be used otherwise
-        static std::string fetchFeedXML(std::string url);
+    private:
+        
     };
 }
 

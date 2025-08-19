@@ -18,19 +18,20 @@ find_package(Catch2 REQUIRED)
 
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
-set(LIGHTRSS_SOURCES 
+set(LIGHTRSS_SOURCES_CORE
     src/core/lrss_parser.cpp
+    src/core/lrss_fetcher.cpp
 )
 set(LIGHTRSS_LIBRARIES fmt::fmt CURL::libcurl)
 
-add_executable(${PROJECT_NAME} src/main.cpp ${LIGHTRSS_SOURCES})
+add_executable(${PROJECT_NAME} src/main.cpp ${LIGHTRSS_SOURCES_CORE})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIGHTRSS_LIBRARIES})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
 add_executable(tests
     tests/main.cpp
-    tests/test_curl.cpp
-    ${LIGHTRSS_SOURCES}
+    tests/test_fetcher.cpp
+    ${LIGHTRSS_SOURCES_CORE}
 )
 target_link_libraries(tests PRIVATE ${LIGHTRSS_LIBRARIES} Catch2::Catch2 Catch2::Catch2WithMain)
 target_compile_features(tests PUBLIC cxx_std_11)
