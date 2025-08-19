@@ -16,6 +16,7 @@ find_package(fmt REQUIRED) # Note that Windows XP needs to use fmt version 4
 find_package(CURL REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/third-party/Catch2/include/)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
