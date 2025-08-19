@@ -19,6 +19,8 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
+
+    src/core/lrss_parser.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt CURL::libcurl)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)

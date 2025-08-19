@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 
 namespace lrss {
     struct LRSSChannel {
@@ -16,5 +17,10 @@ namespace lrss {
         std::string link;
         std::string guid;
         std::string pubDate;
+    };
+
+    struct LRSSFeed {
+        LRSSChannel channelInfo;
+        std::vector<LRSSItem> articles;
     };
 }
