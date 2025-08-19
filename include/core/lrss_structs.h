@@ -1,3 +1,6 @@
+#ifndef LRSS_STRUCTS_H_
+#define LRSS_STRUCTS_H_
+
 #include <string>
 #include <vector>
 
@@ -24,3 +27,5 @@ namespace lrss {
         std::vector<LRSSItem> articles;
     };
 }
+
+#endif // LRSS_STRUCTS_H_
