@@ -24,6 +24,7 @@ namespace lrss {
         static void parseRSSItemNode(xmlNodePtr itemNode, LRSSFeed* feed);
 
         static LRSSFeed parseAtomFeed(std::string content);
+        static void parseAtomEntryNode(xmlNodePtr entryNode, LRSSFeed* feed);
 
         static xmlDocPtr rawParseXML(std::string content);
         static void freeXML(xmlDocPtr doc); // Release the memory

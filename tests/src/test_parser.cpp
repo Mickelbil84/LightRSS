@@ -17,7 +17,7 @@ TEST_CASE("Decide content type", "[parser]") {
     }
 }
 
-TEST_CASE("Parsing YNET feed", "[parser]") {
+TEST_CASE("Parsing YNET feed (RSS)", "[parser]") {
     std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_YNET);
     LRSSFeed ynetFeed = LRSSParser::parseFeed(content);
 
@@ -28,4 +28,19 @@ TEST_CASE("Parsing YNET feed", "[parser]") {
 
     LRSSItem item = ynetFeed.articles[0];
     REQUIRE(item.guid.find("https://www.ynet.co.il/news/article") != std::string::npos);
+}
+
+TEST_CASE("Parsing Verge feed (Atom)", "[parser]") {
+    std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_VERGE);
+    LRSSFeed vergeFeed = LRSSParser::parseFeed(content);
+
+    REQUIRE_FALSE(vergeFeed.invalid);
+    REQUIRE(vergeFeed.channelInfo.title == "The Verge");
+    REQUIRE(vergeFeed.channelInfo.description == "The Verge is about technology and how it makes us feel. Founded in 2011, we offer our audience everything from breaking news to reviews to award-winning features and investigations, on our site, in video, and in podcasts.");
+    REQUIRE(vergeFeed.articles.size() > 5);
+
+    LRSSItem item = vergeFeed.articles[0];
+    REQUIRE(item.guid.find("https://www.theverge.com/") != std::string::npos);
+    REQUIRE(item.pubDate.size() > 0);
+    REQUIRE(item.description.size() > 0);
 }

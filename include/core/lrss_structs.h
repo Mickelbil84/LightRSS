@@ -15,7 +15,8 @@ namespace lrss {
 
     struct LRSSItem {
         std::string title;
-        std::string description;
+        std::string description, summary;
+        std::string author;
         std::string link;
         std::string guid;
         std::string pubDate;
