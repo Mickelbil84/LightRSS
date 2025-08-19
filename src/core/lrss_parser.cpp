@@ -28,5 +28,9 @@ LRSSContentType LRSSParser::decideContentType(std::string content) {
 }
 
 xmlDocPtr LRSSParser::rawParseXML(std::string content) {
-    return 0;
+    return xmlParseMemory(&content.c_str()[0], (int)content.size());
+}
+
+void LRSSParser::freeXML(xmlDocPtr doc) {
+    xmlFreeDoc(doc);
 }

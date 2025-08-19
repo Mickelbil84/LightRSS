@@ -18,9 +18,14 @@ namespace lrss {
 
     private:
         static LRSSFeed parseRSSFeed(std::string content);
+        static void parseRSSRootNode(xmlNodePtr rootNode, LRSSFeed* feed);
+        static void parseRSSChannelNode(xmlNodePtr channelNode, LRSSFeed* feed);
+        static void parseRSSItemNode(xmlNodePtr itemNode, LRSSFeed* feed);
+
         static LRSSFeed parseAtomFeed(std::string content);
 
-        xmlDocPtr rawParseXML(std::string content);
+        static xmlDocPtr rawParseXML(std::string content);
+        static void freeXML(xmlDocPtr doc); // Release the memory
     };
 }
 

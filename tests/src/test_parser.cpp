@@ -5,7 +5,7 @@
 #include "core/lrss_parser.h"
 using namespace lrss;
 
-TEST_CASE("Decide content type", "[curl]") {
+TEST_CASE("Decide content type", "[parser]") {
     const char* urls[] = {LRSS_TEST_URL_YNET, LRSS_TEST_URL_BBC, LRSS_TEST_URL_IGN, LRSS_TEST_URL_NYT, LRSS_TEST_URL_VERGE};
     const LRSSContentType types[] = {
         LRSS_RSS, LRSS_RSS, LRSS_RSS, LRSS_RSS, LRSS_ATOM
@@ -15,4 +15,10 @@ TEST_CASE("Decide content type", "[curl]") {
         std::string response = LRSSFetcher::fetchContent(urls[i]);
         REQUIRE(LRSSParser::decideContentType(response) == types[i]);
     }
+}
+
+TEST_CASE("Parsing YNET feed", "[parser]") {
+    std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_YNET);
+    LRSSFeed ynetFeed = LRSSParser::parseFeed(content);
+    
 }

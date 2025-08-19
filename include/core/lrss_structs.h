@@ -25,6 +25,7 @@ namespace lrss {
     struct LRSSFeed {
         LRSSChannel channelInfo;
         std::vector<LRSSItem> articles;
+        bool invalid = false;
     };
 }
 
