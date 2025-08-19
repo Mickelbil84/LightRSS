@@ -26,3 +26,7 @@ LRSSContentType LRSSParser::decideContentType(std::string content) {
 
     return LRSSContentType::LRSS_INVALID;
 }
+
+xmlDocPtr LRSSParser::rawParseXML(std::string content) {
+    return 0;
+}
