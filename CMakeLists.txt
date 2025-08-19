@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13) # Fun fact: 3.13 is the latest version working on Windows XP (that I know of, at least)
+cmake_minimum_required(VERSION 3.13...3.20) # Fun fact: 3.13 is the latest version working on Windows XP (that I know of, at least)
 
 project(LightRSS)
 
