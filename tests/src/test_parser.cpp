@@ -20,5 +20,12 @@ TEST_CASE("Decide content type", "[parser]") {
 TEST_CASE("Parsing YNET feed", "[parser]") {
     std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_YNET);
     LRSSFeed ynetFeed = LRSSParser::parseFeed(content);
-    
+
+    REQUIRE_FALSE(ynetFeed.invalid);
+    REQUIRE(ynetFeed.channelInfo.copyright == "Ynet - news and content from Israel (Yedioth Ahronoth web site)");
+    REQUIRE(ynetFeed.channelInfo.language == "he");
+    REQUIRE(ynetFeed.articles.size() > 10);
+
+    LRSSItem item = ynetFeed.articles[0];
+    REQUIRE(item.guid.find("https://www.ynet.co.il/news/article") != std::string::npos);
 }

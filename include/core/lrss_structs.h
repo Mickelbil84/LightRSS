@@ -9,9 +9,8 @@ namespace lrss {
         std::string title;
         std::string description;
         std::string link, imageLink;
-        std::string copyright;
+        std::string copyright, language;
         std::string lastBuildDate, pubDate;
-        int ttl;
     };
 
     struct LRSSItem {

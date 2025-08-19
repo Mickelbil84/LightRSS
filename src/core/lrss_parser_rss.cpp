@@ -3,6 +3,8 @@ using namespace lrss;
 
 #include <fmt/core.h>
 
+
+
 LRSSFeed LRSSParser::parseRSSFeed(std::string content) {
     LRSSFeed feed;
 
@@ -14,18 +16,18 @@ LRSSFeed LRSSParser::parseRSSFeed(std::string content) {
 }
 
 void LRSSParser::parseRSSRootNode(xmlNodePtr rootNode, LRSSFeed* feed) {
-    if (std::string((char*)rootNode->name) != "rss") {
+    if (NODE_NAME(rootNode) != "rss") {
         feed->invalid = true;
         return;
     }
 
     xmlNodePtr channelNode = nullptr;
-    for (xmlNodePtr curr = rootNode->children; curr != nullptr; curr = curr->next) {
-        if (std::string((char*)curr->name) == "channel") {
+    BEGIN_CHILDREN_FOR(rootNode)
+        if (NODE_NAME(curr) == "channel") {
             channelNode = curr;
             break;
         }
-    }
+    END_CHILDREN_FOR()
     if (!channelNode) {
         feed->invalid = true;
         return;
@@ -34,11 +36,35 @@ void LRSSParser::parseRSSRootNode(xmlNodePtr rootNode, LRSSFeed* feed) {
     parseRSSChannelNode(channelNode, feed);
 }
 void LRSSParser::parseRSSChannelNode(xmlNodePtr channelNode, LRSSFeed* feed) {
-    for (xmlNodePtr curr = channelNode->children; curr != nullptr; curr = curr->next) {
-        
-    }
-
+    BEGIN_CHILDREN_FOR(channelNode)
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, title, title);
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, description, description);
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, link, link);
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, copyright, copyright);
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, lastBuildDate, lastBuildDate);
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, pubDate, pubDate);
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, language, language);
+        if (NODE_NAME(curr) == "image") 
+            parseRSSChannelImageNode(curr, feed);
+        if (NODE_NAME(curr) == "item")
+            parseRSSItemNode(curr, feed);
+    END_CHILDREN_FOR()
+}
+void LRSSParser::parseRSSChannelImageNode(xmlNodePtr imageNode, LRSSFeed* feed) {
+    BEGIN_CHILDREN_FOR(imageNode)
+        XML_PROPERTY_TO_STRUCT(feed->channelInfo, imageLink, url);
+    END_CHILDREN_FOR()
 }
 void LRSSParser::parseRSSItemNode(xmlNodePtr itemNode, LRSSFeed* feed) {
+    LRSSItem item;
 
+    BEGIN_CHILDREN_FOR(itemNode)
+        XML_PROPERTY_TO_STRUCT(item, title, title);
+        XML_PROPERTY_TO_STRUCT(item, description, description);
+        XML_PROPERTY_TO_STRUCT(item, link, link);
+        XML_PROPERTY_TO_STRUCT(item, guid, guid);
+        XML_PROPERTY_TO_STRUCT(item, pubDate, pubDate);
+    END_CHILDREN_FOR()
+    
+    feed->articles.push_back(item);
 }
