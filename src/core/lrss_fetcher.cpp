@@ -24,7 +24,7 @@ std::string LRSSFetcher::fetchContent(std::string url) {
         if (res != CURLE_OK) {
             int responseCode = 0;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode);
-            response = fmt::format("{}HTTP{}", LRSS_ERR_CONTENT_PREFIX, responseCode);
+            response = fmt::format("{}HTTP{}|CURLCODE:={}", LRSS_ERR_CONTENT_PREFIX, responseCode, (int)res);
         }
         curl_easy_cleanup(curl);
     }
