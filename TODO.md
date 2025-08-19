@@ -2,6 +2,7 @@
 
 ## Core Framework
 
+[ ] Add CI/CD
 [ ] Use standard format for datetime
 [ ] Serialization:
     [ ] Subscribed channels (list of URLS)
@@ -16,11 +17,11 @@
 [ ] Right panel is list of all articles, with bottom panel is article content
 
 Overall the layout is:
-_______________________
+=======================
  S  |                 |
  U  |  Articles List  |
  B  |-----------------|
  S  |                 |
 --- | Article Content |
 Add |                 |
-_______________________
+=======================
