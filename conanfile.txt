@@ -4,7 +4,7 @@ libcurl/8.15.0
 libxml2/2.13.8
 
 [test_requires]
-catch2/2.13.10
+catch2/3.9.1
 
 [generators]
 CMakeDeps
