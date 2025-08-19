@@ -13,12 +13,12 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 find_package(fmt REQUIRED) # Note that Windows XP needs to use fmt version 4
-
+find_package(CURL REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
 )
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt CURL::libcurl)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
