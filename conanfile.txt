@@ -1,0 +1,11 @@
+[requires]
+fmt/11.2.0
+libcurl/8.15.0
+libxml2/2.13.8
+
+[test_requires]
+catch2/2.13.10
+
+[generators]
+CMakeDeps
+CMakeToolchain
