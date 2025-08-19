@@ -55,6 +55,11 @@ jobs:
             #         sudo apt-get update
             #         sudo apt-get install -y --no-install-recommends
             #     if: matrix.os == 'ubuntu-latest'
+
+            -   name: Install Macos deps
+                run: |
+                    brew install pipx
+                if: matrix.os == 'macos-latest'
             
             -   name: Get conan
                 uses: turtlebrowser/get-conan@main
@@ -70,9 +75,10 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-conan-
             
+            # Note that although we support C++11, MSVC forces us to specify at least C++14
             -   name: Install dependencies
                 run: |
-                    conan install . -s build_type=${{matrix.build_type}} --output-folder=. --build=missing -s compiler.cppstd=11
+                    conan install . -s build_type=${{matrix.build_type}} --output-folder=. --build=missing -s compiler.cppstd=14 
             
             -   name: Configure CMake
                 run: >
