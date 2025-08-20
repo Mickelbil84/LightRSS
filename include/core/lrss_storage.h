@@ -7,11 +7,18 @@
 #include <sqlite3.h>
 #include <fmt/core.h>
 
+#include "lrss_structs.h"
+
 namespace lrss {
     class LRSSStorage {
     public:
+        static void init();
+
         static void addNewSubscription(std::string url);
         static std::vector<std::string> getSubscriptions();
+
+        static void deleteChannel(LRSSChannel* channelInfo);
+        static void updateChannel(LRSSChannel* channelInfo);
 
     private:
         static constexpr const char* LRSS_STORAGE_PATH = "storage.db3";

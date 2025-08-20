@@ -32,3 +32,17 @@ TEST_CASE("Store subscriptions", "[storage]") {
         REQUIRE(counts[i] == 1);
     }
 }
+
+TEST_CASE("Store channels", "[storage]") {
+    const char* urls[] = {LRSS_TEST_URL_YNET, LRSS_TEST_URL_BBC, LRSS_TEST_URL_IGN, LRSS_TEST_URL_NYT, LRSS_TEST_URL_VERGE};
+    for (size_t i = 0; i < sizeof(urls) / sizeof(char*); ++i) {
+        LRSSStorage::addNewSubscription(urls[i]);
+    }
+    std::vector<std::string> subscriptions = LRSSStorage::getSubscriptions();
+
+    for (std::string url : subscriptions) {
+        std::string content = LRSSFetcher::fetchContent(url);
+        LRSSFeed feed = LRSSParser::parseFeed(content);
+        LRSSStorage::updateChannel(&feed.channelInfo);
+    }
+}

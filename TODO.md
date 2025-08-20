@@ -5,7 +5,7 @@
 [ ] Add CI/CD
 [ ] Use standard format for datetime
 [ ] Serialization:
-    [ ] Subscribed channels (list of URLS)
+    [x] Subscribed channels (list of URLS)
     [ ] Channel Table + Serialization
     [ ] Article Table + Serializeion + Foreign Key (also mark read/unread)
     [ ] Index via GUID so that we can quickly update

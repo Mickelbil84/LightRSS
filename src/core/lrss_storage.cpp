@@ -3,9 +3,13 @@ using namespace lrss;
 
 std::vector<std::pair<std::string, int>> LRSSStorage::_getSubscriptionsResult;
 
-void LRSSStorage::addNewSubscription(std::string url) {
+void LRSSStorage::init() {
     createSubscriptionsTable();
+    createChannelsTable();
+    createItemsTable();
+}
 
+void LRSSStorage::addNewSubscription(std::string url) {
     std::vector<std::string> existingSubscriptions = getSubscriptions();
     for (std::string existingUrl : existingSubscriptions)
         if (existingUrl == url) return;
@@ -23,6 +27,22 @@ std::vector<std::string> LRSSStorage::getSubscriptions() {
     for (std::pair<std::string, int> x : _getSubscriptionsResult)
         result.push_back(x.first);
     return result;
+}
+
+void LRSSStorage::deleteChannel(LRSSChannel* channelInfo) {
+    std::string query = fmt::format("DELETE FROM CHANNELS WHERE LINK='{}';", channelInfo->link);
+    runDBQuery(query);
+}
+
+void LRSSStorage::updateChannel(LRSSChannel* channelInfo) {
+    deleteChannel(channelInfo);
+    std::string query = fmt::format(
+        "INSERT INTO CHANNELS (ID, TITLE, DESCRIPTION, LINK, IMAGE_LINK, COPYRIGHT, LANGUAGE, LAST_BUILD, PUB_DATE) "\
+        "VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', {}, {})",
+        channelInfo->title, channelInfo->description, channelInfo->link, channelInfo->imageLink,
+        channelInfo->copyright, channelInfo->language, 0, 0
+    );
+    runDBQuery(query);
 }
 
 int LRSSStorage::_getSubscriptionsCallback(void* data, int argc, char** argv, char** azColName) {
@@ -62,7 +82,18 @@ void LRSSStorage::createSubscriptionsTable() {
     runDBQuery(query);
 }
 void LRSSStorage::createChannelsTable() {
-    
+    const char* query = "CREATE TABLE IF NOT EXISTS CHANNELS("\
+        "ID INTEGER PRIMARY KEY,"\
+        "TITLE          CHAR(1024),"\
+        "DESCRIPTION    CHAR(4096),"\
+        "LINK           CHAR(256),"\
+        "IMAGE_LINK     CHAR(256),"\
+        "COPYRIGHT      CHAR(1024),"\
+        "LANGUAGE       CHAR(32),"\
+        "LAST_BUILD     INTEGER,"\
+        "PUB_DATE       INTEGER"\
+        ");";
+    runDBQuery(query);
 }
 void LRSSStorage::createItemsTable() {
     
