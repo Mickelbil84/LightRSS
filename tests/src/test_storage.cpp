@@ -11,6 +11,8 @@
 using namespace lrss;
 
 TEST_CASE("Store subscriptions", "[storage]") {
+    LRSSStorage::init();
+
     const char* urls[] = {LRSS_TEST_URL_YNET, LRSS_TEST_URL_BBC, LRSS_TEST_URL_IGN, LRSS_TEST_URL_NYT, LRSS_TEST_URL_VERGE};
     for (size_t i = 0; i < sizeof(urls) / sizeof(char*); ++i) {
         LRSSStorage::addNewSubscription(urls[i]);
@@ -34,6 +36,8 @@ TEST_CASE("Store subscriptions", "[storage]") {
 }
 
 TEST_CASE("Store channels", "[storage]") {
+    LRSSStorage::init();
+    
     const char* urls[] = {LRSS_TEST_URL_YNET, LRSS_TEST_URL_BBC, LRSS_TEST_URL_IGN, LRSS_TEST_URL_NYT, LRSS_TEST_URL_VERGE};
     for (size_t i = 0; i < sizeof(urls) / sizeof(char*); ++i) {
         LRSSStorage::addNewSubscription(urls[i]);
