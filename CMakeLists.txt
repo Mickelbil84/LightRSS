@@ -15,6 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 find_package(fmt REQUIRED) # Note that Windows XP needs to use fmt version 4
 find_package(CURL REQUIRED)
 find_package(LibXml2 REQUIRED)
+find_package(SQLite3 REQUIRED)
 
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -23,8 +24,9 @@ set(LIGHTRSS_SOURCES_CORE
     ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_rss.cpp
     ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_atom.cpp
     ${CMAKE_SOURCE_DIR}/src/core/lrss_fetcher.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_storage.cpp
 )
-set(LIGHTRSS_LIBRARIES fmt::fmt CURL::libcurl LibXml2::LibXml2)
+set(LIGHTRSS_LIBRARIES fmt::fmt CURL::libcurl LibXml2::LibXml2 SQLite::SQLite3)
 
 add_executable(${PROJECT_NAME} src/main.cpp ${LIGHTRSS_SOURCES_CORE})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIGHTRSS_LIBRARIES})
