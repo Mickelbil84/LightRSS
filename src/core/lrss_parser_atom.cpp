@@ -1,8 +1,9 @@
 #include "core/lrss_parser.h"
 using namespace lrss;
 
-LRSSFeed LRSSParser::parseAtomFeed(std::string content) {
+LRSSFeed LRSSParser::parseAtomFeed(std::string guid, std::string content) {
     LRSSFeed feed;
+    feed.channelInfo.guid = guid;
 
     xmlDocPtr doc = rawParseXML(content);
     xmlNodePtr root = xmlDocGetRootElement(doc);

@@ -6,6 +6,7 @@
 
 namespace lrss {
     struct LRSSChannel {
+        std::string guid; // This should be the subscription url (in case not present in 'link' or different)
         std::string title;
         std::string description;
         std::string link, imageLink;

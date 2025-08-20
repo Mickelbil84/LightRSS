@@ -13,17 +13,17 @@ namespace lrss {
 
     class LRSSParser {
     public:
-        static LRSSFeed parseFeed(std::string content);
+        static LRSSFeed parseFeed(std::string guid, std::string content);
         static LRSSContentType decideContentType(std::string content);
 
     private:
-        static LRSSFeed parseRSSFeed(std::string content);
+        static LRSSFeed parseRSSFeed(std::string guid, std::string content);
         static void parseRSSRootNode(xmlNodePtr rootNode, LRSSFeed* feed);
         static void parseRSSChannelNode(xmlNodePtr channelNode, LRSSFeed* feed);
         static void parseRSSChannelImageNode(xmlNodePtr imageNode, LRSSFeed* feed);
         static void parseRSSItemNode(xmlNodePtr itemNode, LRSSFeed* feed);
 
-        static LRSSFeed parseAtomFeed(std::string content);
+        static LRSSFeed parseAtomFeed(std::string guid, std::string content);
         static void parseAtomEntryNode(xmlNodePtr entryNode, LRSSFeed* feed);
 
         static xmlDocPtr rawParseXML(std::string content);

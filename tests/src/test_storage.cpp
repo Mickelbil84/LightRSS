@@ -37,7 +37,7 @@ TEST_CASE("Store subscriptions", "[storage]") {
 
 TEST_CASE("Store channels", "[storage]") {
     LRSSStorage::init();
-    
+
     const char* urls[] = {LRSS_TEST_URL_YNET, LRSS_TEST_URL_BBC, LRSS_TEST_URL_IGN, LRSS_TEST_URL_NYT, LRSS_TEST_URL_VERGE};
     for (size_t i = 0; i < sizeof(urls) / sizeof(char*); ++i) {
         LRSSStorage::addNewSubscription(urls[i]);
@@ -46,7 +46,7 @@ TEST_CASE("Store channels", "[storage]") {
 
     for (std::string url : subscriptions) {
         std::string content = LRSSFetcher::fetchContent(url);
-        LRSSFeed feed = LRSSParser::parseFeed(content);
+        LRSSFeed feed = LRSSParser::parseFeed(url, content);
         LRSSStorage::updateChannel(&feed.channelInfo);
     }
 }

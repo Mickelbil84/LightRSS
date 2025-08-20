@@ -5,8 +5,9 @@ using namespace lrss;
 
 
 
-LRSSFeed LRSSParser::parseRSSFeed(std::string content) {
+LRSSFeed LRSSParser::parseRSSFeed(std::string guid, std::string content) {
     LRSSFeed feed;
+    feed.channelInfo.guid = guid;
 
     xmlDocPtr doc = rawParseXML(content);
     xmlNodePtr root = xmlDocGetRootElement(doc);

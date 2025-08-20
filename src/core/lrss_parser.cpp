@@ -2,12 +2,12 @@
 using namespace lrss;
 
 
-LRSSFeed LRSSParser::parseFeed(std::string content) {
+LRSSFeed LRSSParser::parseFeed(std::string guid, std::string content) {
     LRSSContentType ct = decideContentType(content);
     if (ct == LRSSContentType::LRSS_RSS)
-        return parseRSSFeed(content);
+        return parseRSSFeed(guid, content);
     if (ct == LRSSContentType::LRSS_ATOM)
-        return parseAtomFeed(content);
+        return parseAtomFeed(guid, content);
     return {};
 }
 

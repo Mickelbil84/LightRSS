@@ -30,16 +30,16 @@ std::vector<std::string> LRSSStorage::getSubscriptions() {
 }
 
 void LRSSStorage::deleteChannel(LRSSChannel* channelInfo) {
-    std::string query = fmt::format("DELETE FROM CHANNELS WHERE LINK='{}';", channelInfo->link);
+    std::string query = fmt::format("DELETE FROM CHANNELS WHERE GUID='{}';", channelInfo->guid);
     runDBQuery(query);
 }
 
 void LRSSStorage::updateChannel(LRSSChannel* channelInfo) {
     deleteChannel(channelInfo);
     std::string query = fmt::format(
-        "INSERT INTO CHANNELS (ID, TITLE, DESCRIPTION, LINK, IMAGE_LINK, COPYRIGHT, LANGUAGE, LAST_BUILD, PUB_DATE) "\
-        "VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', {}, {})",
-        channelInfo->title, channelInfo->description, channelInfo->link, channelInfo->imageLink,
+        "INSERT INTO CHANNELS (ID, GUID, TITLE, DESCRIPTION, LINK, IMAGE_LINK, COPYRIGHT, LANGUAGE, LAST_BUILD, PUB_DATE) "\
+        "VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}', {}, {})",
+        channelInfo->guid, channelInfo->title, channelInfo->description, channelInfo->link, channelInfo->imageLink,
         channelInfo->copyright, channelInfo->language, 0, 0
     );
     runDBQuery(query);
@@ -84,6 +84,7 @@ void LRSSStorage::createSubscriptionsTable() {
 void LRSSStorage::createChannelsTable() {
     const char* query = "CREATE TABLE IF NOT EXISTS CHANNELS("\
         "ID INTEGER PRIMARY KEY,"\
+        "GUID           CHAR(256) NOT NULL,"
         "TITLE          CHAR(1024),"\
         "DESCRIPTION    CHAR(4096),"\
         "LINK           CHAR(256),"\

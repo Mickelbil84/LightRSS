@@ -26,12 +26,13 @@ TEST_CASE("Decide content type", "[parser]") {
 }
 
 TEST_CASE("Parsing YNET feed (RSS)", "[parser]") {
-    std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_YNET);
+    std::string url = LRSS_TEST_URL_YNET;
+    std::string content = LRSSFetcher::fetchContent(url);
     if (LRSSFetcher::isBadContent(content)) {
         fmt::print("{}\n", content);
         content = "";
     }
-    LRSSFeed ynetFeed = LRSSParser::parseFeed(content);
+    LRSSFeed ynetFeed = LRSSParser::parseFeed(url, content);
 
     REQUIRE_FALSE(ynetFeed.invalid);
     REQUIRE(ynetFeed.channelInfo.copyright == "Ynet - news and content from Israel (Yedioth Ahronoth web site)");
@@ -43,12 +44,13 @@ TEST_CASE("Parsing YNET feed (RSS)", "[parser]") {
 }
 
 TEST_CASE("Parsing Verge feed (Atom)", "[parser]") {
-    std::string content = LRSSFetcher::fetchContent(LRSS_TEST_URL_VERGE);
+    std::string url = LRSS_TEST_URL_VERGE;
+    std::string content = LRSSFetcher::fetchContent(url);
     if (LRSSFetcher::isBadContent(content)) {
         fmt::print("{}\n", content);
         content = "";
     }
-    LRSSFeed vergeFeed = LRSSParser::parseFeed(content);
+    LRSSFeed vergeFeed = LRSSParser::parseFeed(url, content);
 
     REQUIRE_FALSE(vergeFeed.invalid);
     REQUIRE(vergeFeed.channelInfo.title == "The Verge");
