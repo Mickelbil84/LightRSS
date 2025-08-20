@@ -39,7 +39,7 @@ namespace lrss {
 // Get the property name as it appears in the struct and in the xml
 // Then take the `curr` node content from the xml into the correct location/offset in the struct.
 #define XML_PROPERTY_TO_STRUCT(ptr, structName, xmlName) {\
-    if (NODE_NAME(curr) == #xmlName) {\
+    if ((NODE_NAME(curr) == #xmlName) && (ptr.structName.size() == 0)) {\
         ptr.structName = NODE_CONTENT(curr);\
     }\
 }
