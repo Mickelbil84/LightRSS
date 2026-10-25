@@ -42,3 +42,6 @@
 
 build/
 bin/
+
+.DS_Store
+tests/Testing/

@@ -1,5 +1,6 @@
 #include <curl/curl.h>
 #include <fmt/core.h>
+#include <fmt/format.h>
 
 #include "core/lrss_fetcher.h"
 using namespace lrss;
