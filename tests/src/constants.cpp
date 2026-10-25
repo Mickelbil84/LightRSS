@@ -1,7 +1,7 @@
 #include "constants.h"
 
 namespace lrss {
-    const char* LRSS_TEST_URL_EXAMPLECOM = "www.example.com";
+    const char* LRSS_TEST_URL_GOOGLECOM = "https://www.google.com";
     const char* LRSS_TEST_URL_YNET = "https://www.ynet.co.il/Integration/StoryRss2.xml";
     const char* LRSS_TEST_URL_BBC = "https://feeds.bbci.co.uk/news/rss.xml";
     const char* LRSS_TEST_URL_IGN = "https://feeds.feedburner.com/ign/all";

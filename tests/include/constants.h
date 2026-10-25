@@ -2,7 +2,7 @@
 #define CONSTANTS_H_
 
 namespace lrss {
-    extern const char* LRSS_TEST_URL_EXAMPLECOM;
+    extern const char* LRSS_TEST_URL_GOOGLECOM;
     extern const char* LRSS_TEST_URL_YNET;
     extern const char* LRSS_TEST_URL_BBC;
     extern const char* LRSS_TEST_URL_IGN;

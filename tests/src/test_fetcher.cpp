@@ -10,14 +10,15 @@
 #include "core/lrss_parser.h"
 using namespace lrss;
 
-TEST_CASE("Fetch example.com", "[fetcher]") {
-    std::string response = LRSSFetcher::fetchContent(LRSS_TEST_URL_EXAMPLECOM);
+TEST_CASE("Fetch google.com", "[fetcher]") {
+    std::string response = LRSSFetcher::fetchContent(LRSS_TEST_URL_GOOGLECOM);
     if (LRSSFetcher::isBadContent(response)) {
         fmt::print("{}\n", response);
         response = "";
     }
     REQUIRE(response.size() > 0);
-    REQUIRE(response.find("<h1>Example Domain</h1>") != std::string::npos);
+    REQUIRE(response.find("<!doctype html>") != std::string::npos);
+    REQUIRE(response.find("google.com") != std::string::npos);
 }
 TEST_CASE("Fetch ynet", "[fetcher]") {
     std::string response = LRSSFetcher::fetchContent(LRSS_TEST_URL_YNET);
@@ -26,7 +27,7 @@ TEST_CASE("Fetch ynet", "[fetcher]") {
         response = "";
     }
     REQUIRE(response.size() > 0);
-    REQUIRE(response.find("<h1>Example Domain</h1>") == std::string::npos); // RSS shouldn't have the example.com header
+    REQUIRE(response.find("<h1>This header definetly shouldn't exist</h1>") == std::string::npos);
     REQUIRE(response.find("<rss version=") != std::string::npos);
 }
 TEST_CASE("Fetch multiple RSS sites", "[fetcher]") {
