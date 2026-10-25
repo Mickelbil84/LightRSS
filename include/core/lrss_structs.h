@@ -11,6 +11,8 @@ namespace lrss {
         std::string link, imageLink;
         std::string copyright, language;
         std::string lastBuildDate, pubDate;
+
+        std::string toString();
     };
 
     struct LRSSItem {
@@ -20,12 +22,16 @@ namespace lrss {
         std::string link;
         std::string guid;
         std::string pubDate;
+
+        std::string toString();
     };
 
     struct LRSSFeed {
         LRSSChannel channelInfo;
         std::vector<LRSSItem> articles;
         bool invalid = false;
+
+        std::string toString();
     };
 }
 

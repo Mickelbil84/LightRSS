@@ -29,6 +29,7 @@ set(LIGHTRSS_SOURCES_CORE
     ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_rss.cpp
     ${CMAKE_SOURCE_DIR}/src/core/lrss_parser_atom.cpp
     ${CMAKE_SOURCE_DIR}/src/core/lrss_fetcher.cpp
+    ${CMAKE_SOURCE_DIR}/src/core/lrss_structs.cpp
 )
 set(LIGHTRSS_LIBRARIES fmt::fmt CURL::libcurl LibXml2::LibXml2)
 

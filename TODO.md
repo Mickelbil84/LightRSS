@@ -2,7 +2,7 @@
 
 ## Core Framework
 
-[ ] Add CI/CD
+[x] Add CI/CD
 [ ] Use standard format for datetime
 [ ] Serialization:
     [ ] Subscribed channels (list of URLS)
@@ -12,7 +12,7 @@
 
 ## UI
 
-[ ] Add WxWidgets as a dependency
+[x] Add Qt5 as a dependency
 [ ] Left panel is a list of all subscribed channels (+ ALL), and you can add/remove
 [ ] Right panel is list of all articles, with bottom panel is article content
 
