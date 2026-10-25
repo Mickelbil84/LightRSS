@@ -50,11 +50,12 @@ jobs:
                 shell: bash
                 run: |
                     echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-            # -   name: Install Ubuntu deps
-            #     run: |
-            #         sudo apt-get update
-            #         sudo apt-get install -y --no-install-recommends
-            #     if: matrix.os == 'ubuntu-latest'
+
+            -   name: Install Ubuntu deps
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y --no-install-recommends libgl-dev libgl1-mesa-dev
+                if: matrix.os == 'ubuntu-latest'
 
             -   name: Install Macos deps
                 uses: actions/setup-python@v5
