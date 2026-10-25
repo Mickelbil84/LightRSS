@@ -79,6 +79,8 @@ jobs:
             
             # Note that although we support C++11, MSVC forces us to specify at least C++14, and Qt5's dependeicies force us C++17 :(
             -   name: Install dependencies
+                env:
+                    CFLAGS: ${{ matrix.os == 'ubuntu-latest' && '-std=gnu17' || '' }}
                 run: |
                     conan install . -s build_type=${{matrix.build_type}} --output-folder=. --build=missing -s compiler.cppstd=17 
             
