@@ -2,6 +2,7 @@
 fmt/11.2.0
 libcurl/8.15.0
 libxml2/2.13.8
+qt/5.15.19
 
 [test_requires]
 catch2/3.9.1
