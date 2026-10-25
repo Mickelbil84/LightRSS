@@ -16,6 +16,12 @@ find_package(fmt REQUIRED) # Note that Windows XP needs to use fmt version 4
 find_package(CURL REQUIRED)
 find_package(LibXml2 REQUIRED)
 
+if (APPLE) 
+    set(Qt5_DIR /opt/homebrew/opt/qt@5/lib/cmake/Qt5)
+endif()
+
+find_package(Qt5 COMPONENTS Widgets REQUIRED) # Last XP supported version is ~5.6
+
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 set(LIGHTRSS_SOURCES_CORE
